@@ -10,8 +10,15 @@ from crewai import Agent, Task, Crew, Process, LLM
 from datetime import datetime
 from functools import lru_cache
 
+import boto3
+from dotenv import load_dotenv
+load_dotenv()
+
+import litellm
+# litellm._turn_on_debug()
+
 # Load API Keys
-GEMINI_API_KEY = os.getenv("GOOGLE_API_KEY", "your_gemini_api_key_here")
+BEDROCK_MODEL_ID = os.environ.get('BEDROCK_MODEL_ID', "your_bedrock_model_id_here")
 SERP_API_KEY = os.getenv("SERP_API_KEY", "your_serpapi_key_here")
 
 # Initialize Logger
@@ -24,11 +31,17 @@ logger = logging.getLogger(__name__)
 # ==============================================
 @lru_cache(maxsize=1)
 def initialize_llm():
+    session = boto3.Session()
+    # credentials = session.get_credentials()
+    # aws_access_key_id, aws_secret_access_key = credentials.access_key, credentials.secret_key
+    aws_region_name = session.region_name
+
     """Initialize and cache the LLM instance to avoid repeated initializations."""
     return LLM(
-        model="gemini/gemini-2.0-flash",
-        provider="google",
-        api_key=GEMINI_API_KEY
+        model=f"bedrock/{BEDROCK_MODEL_ID}",
+        # aws_access_key_id=aws_access_key_id,
+        # aws_secret_access_key=aws_secret_access_key,
+        aws_region_name=aws_region_name
     )
 
 # ==============================================

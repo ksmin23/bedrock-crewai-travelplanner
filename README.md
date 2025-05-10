@@ -13,7 +13,7 @@ An agentic AI travel planning application using Gemini LLM and CrewAI framework.
 This project demonstrates how to build a multi-agent system where specialized AI agents work together to create comprehensive travel plans. Instead of manually searching across multiple platforms, this application automates the process through intelligent AI collaboration.
 
 The system leverages:
-- **Gemini 2.0 LLM**: Powers the intelligence behind each agent
+- **Amazon Bedrock LLM**: Powers the intelligence behind each agent
 - **CrewAI**: Coordinates the multi-agent workflow
 - **SerpAPI**: Retrieves real-time flight and hotel data
 - **FastAPI**: Handles backend API endpoints
@@ -32,7 +32,7 @@ The system leverages:
 - AI suggests the best hotel by analyzing factors like proximity to key locations
 
 ### 3. AI-Powered Analysis & Recommendations
-- Gemini LLM-powered AI agent evaluates travel options
+- Amazon Bedrock LLM-powered AI agent evaluates travel options
 - Uses CrewAI to coordinate multiple AI agents for better decision-making
 - AI explains its recommendation logic for flights and hotels
 
@@ -53,20 +53,20 @@ This project is based on the article: [Agentic AI: Building a Multi-Agent AI Tra
 ### Prerequisites
 - Python 3.8+
 - SerpAPI key for fetching real-time flight and hotel data
-- Google Gemini API key for AI recommendations
+- Amazon Bedrock Model Id for AI recommendations
 
 ### Setup
 
 1. Clone the repository
 ```bash
-git clone https://github.com/arjunprabhulal/gemini-crewai-travelplanner.git
-cd gemini-crewai-travelplanner
+git clone https://github.com/ksmin23/bedrock-crewai-travelplanner.git
+cd bedrock-crewai-travelplanner
 ```
 
 2. Create and activate a virtual environment
 ```bash
 # Create virtual environment
-python -m venv venv
+uv venv
 
 # Activate virtual environment
 # On Windows
@@ -77,18 +77,18 @@ source venv/bin/activate
 
 3. Install dependencies
 ```bash
-pip install -r requirements.txt
+uv pip install -r requirements.txt
 ```
 
 4. Configure API keys
 Set your API keys in the gemini2_travel_v2.py file:
 ```python
 # Load API Keys
-GEMINI_API_KEY = os.getenv("GOOGLE_API_KEY", "your_gemini_api_key_here")
+BEDROCK_MODEL_ID = os.getenv("BEDROCK_MODEL_ID", "your_bedrock_model_id_here")
 SERP_API_KEY = os.getenv("SERP_API_KEY", "your_serpapi_key_here")
 ```
 
-- Get a Gemini API key from [Google AI Studio](https://makersuite.google.com/)
+<!-- - Get a Gemini API key from [Google AI Studio](https://makersuite.google.com/) -->
 - Get a SerpAPI key from [SerpAPI](https://serpapi.com/)
 
 ## Usage
@@ -100,7 +100,7 @@ python gemini2_travel_v2.py
 
 2. In a new terminal window, start the Streamlit frontend
 ```bash
-python gemini2_travel_v2_frontend.py
+streamlit run gemini2_travel_v2_frontend.py
 ```
 
 3. Open your browser and navigate to http://localhost:8501
@@ -148,7 +148,7 @@ The application follows a modular architecture:
 
 1. **API Initialization**:
    - FastAPI setup with endpoints for flight search, hotel search, and itinerary generation
-  
+
 2. **Data Retrieval**:
    - Asynchronous functions connect to SerpAPI to fetch real-time flight and hotel data
    - Response formatting and data validation using Pydantic models
@@ -156,7 +156,7 @@ The application follows a modular architecture:
 3. **AI Analysis**:
    - CrewAI orchestrates specialized AI agents
    - Each agent analyzes specific aspects of the travel plan
-   - Gemini LLM powers the intelligence of each agent
+   - Amazon Bedrock LLM powers the intelligence of each agent
 
 4. **Frontend Interface**:
    - Streamlit UI with interactive forms and tabs
@@ -165,7 +165,7 @@ The application follows a modular architecture:
 
 ## Repository
 
-This code is available on GitHub at [arjunprabhulal/gemini-crewai-travelplanner](https://github.com/arjunprabhulal/gemini-crewai-travelplanner).
+This code is available on GitHub at [ksmin23/bedrock-crewai-travelplanner](https://github.com/ksmin23/bedrock-crewai-travelplanner).
 
 ## Author
 
